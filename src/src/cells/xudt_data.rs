@@ -13,6 +13,20 @@ pub struct XUDTDataCell {
 }
 
 
+//
+// pub struct CellStruct<A, B, C, D>
+// where
+//     A: Serialize + Deserialize<'static>,
+//     B: Serialize + Deserialize<'static>,
+//     C: Serialize + Deserialize<'static>,
+//     D: Serialize + Deserialize<'static>,
+// {
+//     pub lock_arg: A,
+//     pub type_arg: Option<B>,
+//     pub data: C,
+//     pub witness: Option<D>,
+//     pub struct_flag: MoleculeStructFlag,
+// }
 
 #[derive(Serialize, Deserialize, Clone, PartialEq, Debug)]
 pub struct XUDTData {
