@@ -16,12 +16,7 @@ impl Demo {
             type_arg: None,
             data: 1,
             witness: None,
-            struct_flag: MoleculeStructFlag {
-                lock_arg: true,
-                type_arg: true,
-                data: true,
-                witness: true,
-            },
+            struct_flag: MoleculeStructFlag::default(),
         };
     }
     pub(crate) fn new() -> Self {
@@ -30,15 +25,9 @@ impl Demo {
             type_arg: None,
             data: 1,
             witness: None,
-            struct_flag: MoleculeStructFlag {
-                lock_arg: true,
-                type_arg: true,
-                data: true,
-                witness: true,
-            },
+            struct_flag: MoleculeStructFlag::default(),
         };
     }
-
 }
 
 
