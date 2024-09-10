@@ -14,7 +14,7 @@ use std::path::PathBuf;
 use std::str::FromStr;
 use ckb_std::ckb_types::packed::Script;
 
-use ckb_testtool::ckb_types::packed::{CellInput, CellOutput, CellOutputBuilder, OutPoint, ScriptOptBuilder};
+use ckb_testtool::ckb_types::packed::{CellDep, CellInput, CellOutput, CellOutputBuilder, OutPoint, ScriptOptBuilder};
 use ckb_testtool::ckb_types::prelude::{Builder, Entity, Pack, Unpack};
 use serde_molecule::from_slice;
 use crate::cell_message::cell::Cell;
@@ -182,12 +182,27 @@ impl ContractUtil {
         self.context.deploy_cell(stack_reorder_bin)
     }
 
+    ///
+    /// create input cell, add input cell to tx
     pub fn add_input(&mut self, tx_builder: TransactionView, lock_contract: OutPoint, type_contract: Option<OutPoint>, cell_tx: &dyn Cell, redundant_cap: usize) -> TransactionView {
         let cell_output = self.get_celloutput_builder(&lock_contract, &type_contract, cell_tx, redundant_cap);
 
         // data
         let out_point1 = self.context.create_cell(cell_output.build(), cell_tx.get_data().into());
-        let input = CellInput::new_builder().previous_output(out_point1).build();
+        let input = CellInput::new_builder()
+            .previous_output(out_point1).build();
+        tx_builder.as_advanced_builder()
+            .input(input).build()
+    }
+
+    pub fn add_input_with_since(&mut self, tx_builder: TransactionView, lock_contract: OutPoint, type_contract: Option<OutPoint>, cell_tx: &dyn Cell, since: u64, redundant_cap: usize) -> TransactionView {
+        let cell_output = self.get_celloutput_builder(&lock_contract, &type_contract, cell_tx, redundant_cap);
+
+        // data
+        let out_point1 = self.context.create_cell(cell_output.build(), cell_tx.get_data().into());
+        let input = CellInput::new_builder()
+            .since(since.pack())
+            .previous_output(out_point1).build();
         tx_builder.as_advanced_builder()
             .input(input).build()
     }
@@ -270,6 +285,7 @@ impl ContractUtil {
                 Bytes::from(vec![])
             }
             Some(witness) => {
+                println!("new witness:{:?}", witness);
                 Bytes::from(witness)
             }
         };
@@ -403,5 +419,10 @@ impl ContractUtil {
             Some(witness) => { Some(witness.unpack()) }
         };
         T::from_arg(lock_args, type_args, data, witness_args_raw_data)
+    }
+
+    pub fn add_contract_cell_dep(&self, tx_builder: TransactionView, contract: &OutPoint) -> TransactionView {
+        return tx_builder.as_advanced_builder().cell_dep(CellDep::new_builder().out_point(contract.clone()).build()
+        ).build();
     }
 }

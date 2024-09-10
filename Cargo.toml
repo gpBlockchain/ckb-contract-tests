@@ -9,6 +9,9 @@ ckb-testtool = "0.10.2"
 serde_json = "1.0"
 bytes = "1.5.0"
 serde = { version = "1.0.209", features = ["derive"] }
+secp256k1 = { version = "0.28", features = ["rand-std"] }
+musig2 = "0.0.11"
+sha2 = "0.10"
 
 [dev-dependencies]
 ckb-std = "0.15"

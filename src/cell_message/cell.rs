@@ -19,3 +19,15 @@ pub struct MoleculeStructFlag {
     pub data: bool,
     pub witness: bool,
 }
+
+
+impl MoleculeStructFlag {
+    pub(crate) fn default() -> Self {
+        MoleculeStructFlag {
+            lock_arg: true,
+            type_arg: true,
+            data: true,
+            witness: true,
+        }
+    }
+}
