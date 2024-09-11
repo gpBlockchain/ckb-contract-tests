@@ -182,6 +182,7 @@ impl ContractUtil {
         self.context.deploy_cell(stack_reorder_bin)
     }
 
+
     ///
     /// create input cell, add input cell to tx
     pub fn add_input(&mut self, tx_builder: TransactionView, lock_contract: OutPoint, type_contract: Option<OutPoint>, cell_tx: &dyn Cell, redundant_cap: usize) -> TransactionView {
@@ -251,7 +252,6 @@ impl ContractUtil {
 
         // lock script
         let lock_script = self.context.build_script(&lock_contract, cell_tx.get_lock_arg().into()).unwrap();
-
 
         let mut cell_output = {
             let mut cell_output = CellOutputBuilder::default()
