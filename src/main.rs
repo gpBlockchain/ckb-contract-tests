@@ -12,6 +12,7 @@ use std::env;
 use std::fs;
 use std::path::PathBuf;
 use std::str::FromStr;
+use ckb_std::ckb_types::core::ScriptHashType;
 use ckb_std::ckb_types::packed::Script;
 
 use ckb_testtool::ckb_types::packed::{CellDep, CellInput, CellOutput, CellOutputBuilder, OutPoint, ScriptOptBuilder};
@@ -27,6 +28,7 @@ mod cells;
 mod cell_message;
 
 pub mod prelude {
+    use ckb_std::ckb_types::core::ScriptHashType;
     use ckb_testtool::{
         ckb_error::Error,
         ckb_types::core::{Cycle, TransactionView},
@@ -47,6 +49,7 @@ pub mod prelude {
 // The exact same Loader code from capsule's template, except that
 // now we use MODE as the environment variable
 const TEST_ENV_VAR: &str = "MODE";
+const DEFAULT_TYPE: ScriptHashType = ScriptHashType::Data1;
 
 pub enum TestEnv {
     Debug,
@@ -251,7 +254,7 @@ impl ContractUtil {
 
 
         // lock script
-        let lock_script = self.context.build_script(&lock_contract, cell_tx.get_lock_arg().into()).unwrap();
+        let lock_script = self.context.build_script_with_hash_type(&lock_contract, DEFAULT_TYPE, cell_tx.get_lock_arg().into()).unwrap();
 
         let mut cell_output = {
             let mut cell_output = CellOutputBuilder::default()
@@ -259,7 +262,7 @@ impl ContractUtil {
             match type_contract {
                 None => {}
                 Some(contract) => {
-                    let script = self.context.build_script(&contract, cell_tx.get_type_arg().unwrap().into()).unwrap();
+                    let script = self.context.build_script_with_hash_type(&contract, DEFAULT_TYPE, cell_tx.get_type_arg().unwrap().into()).unwrap();
                     cell_output = cell_output.type_(ScriptOptBuilder::default()
                         .set(Some(script)).build());
                 }
@@ -337,7 +340,7 @@ impl ContractUtil {
 
 
         // lock script
-        let lock_script = self.context.build_script(&lock_contract, cell_tx.get_lock_arg().into()).unwrap();
+        let lock_script = self.context.build_script_with_hash_type(&lock_contract, ScriptHashType::Data1, cell_tx.get_lock_arg().into()).unwrap();
 
         let mut cell_output = {
             let mut cell_output = CellOutputBuilder::default()
@@ -345,7 +348,7 @@ impl ContractUtil {
             match type_contract {
                 None => {}
                 Some(contract) => {
-                    let script = self.context.build_script(&contract, cell_tx.get_type_arg().unwrap().into()).unwrap();
+                    let script = self.context.build_script_with_hash_type(&contract,DEFAULT_TYPE, cell_tx.get_type_arg().unwrap().into()).unwrap();
                     cell_output = cell_output.type_(ScriptOptBuilder::default()
                         .set(Some(script)).build());
                 }
