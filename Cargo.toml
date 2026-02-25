@@ -27,3 +27,34 @@ walkdir = "2.4"
 version = "1.0.0"
 git = "https://github.com/XuJiandong/serde_molecule.git"
 rev = "07f145d"
+
+[patch.crates-io]
+# ckb-vm dependencies from mohanson-fork (asm support on rv64gc)
+ckb-vm = { git = "https://github.com/mohanson-fork/ckb-vm", branch = "asm_rv64im" }
+ckb-vm-definitions = { git = "https://github.com/mohanson-fork/ckb-vm", branch = "asm_rv64im" }
+# ckb dependencies from gpBlockchain (updated to work with new ckb-vm)
+ckb-chain-spec = { git = "https://github.com/gpBlockchain/ckb", branch = "copilot/update-ckb-vm-to-asm-rv64im" }
+ckb-constant = { git = "https://github.com/gpBlockchain/ckb", branch = "copilot/update-ckb-vm-to-asm-rv64im" }
+ckb-crypto = { git = "https://github.com/gpBlockchain/ckb", branch = "copilot/update-ckb-vm-to-asm-rv64im" }
+ckb-dao = { git = "https://github.com/gpBlockchain/ckb", branch = "copilot/update-ckb-vm-to-asm-rv64im" }
+ckb-dao-utils = { git = "https://github.com/gpBlockchain/ckb", branch = "copilot/update-ckb-vm-to-asm-rv64im" }
+ckb-error = { git = "https://github.com/gpBlockchain/ckb", branch = "copilot/update-ckb-vm-to-asm-rv64im" }
+ckb-fixed-hash = { git = "https://github.com/gpBlockchain/ckb", branch = "copilot/update-ckb-vm-to-asm-rv64im" }
+ckb-fixed-hash-core = { git = "https://github.com/gpBlockchain/ckb", branch = "copilot/update-ckb-vm-to-asm-rv64im" }
+ckb-fixed-hash-macros = { git = "https://github.com/gpBlockchain/ckb", branch = "copilot/update-ckb-vm-to-asm-rv64im" }
+ckb-gen-types = { git = "https://github.com/gpBlockchain/ckb", branch = "copilot/update-ckb-vm-to-asm-rv64im" }
+ckb-hash = { git = "https://github.com/gpBlockchain/ckb", branch = "copilot/update-ckb-vm-to-asm-rv64im" }
+ckb-jsonrpc-types = { git = "https://github.com/gpBlockchain/ckb", branch = "copilot/update-ckb-vm-to-asm-rv64im" }
+ckb-logger = { git = "https://github.com/gpBlockchain/ckb", branch = "copilot/update-ckb-vm-to-asm-rv64im" }
+ckb-occupied-capacity = { git = "https://github.com/gpBlockchain/ckb", branch = "copilot/update-ckb-vm-to-asm-rv64im" }
+ckb-occupied-capacity-core = { git = "https://github.com/gpBlockchain/ckb", branch = "copilot/update-ckb-vm-to-asm-rv64im" }
+ckb-occupied-capacity-macros = { git = "https://github.com/gpBlockchain/ckb", branch = "copilot/update-ckb-vm-to-asm-rv64im" }
+ckb-pow = { git = "https://github.com/gpBlockchain/ckb", branch = "copilot/update-ckb-vm-to-asm-rv64im" }
+ckb-rational = { git = "https://github.com/gpBlockchain/ckb", branch = "copilot/update-ckb-vm-to-asm-rv64im" }
+ckb-resource = { git = "https://github.com/gpBlockchain/ckb", branch = "copilot/update-ckb-vm-to-asm-rv64im" }
+ckb-script = { git = "https://github.com/gpBlockchain/ckb", branch = "copilot/update-ckb-vm-to-asm-rv64im" }
+ckb-systemtime = { git = "https://github.com/gpBlockchain/ckb", branch = "copilot/update-ckb-vm-to-asm-rv64im" }
+ckb-traits = { git = "https://github.com/gpBlockchain/ckb", branch = "copilot/update-ckb-vm-to-asm-rv64im" }
+ckb-types = { git = "https://github.com/gpBlockchain/ckb", branch = "copilot/update-ckb-vm-to-asm-rv64im" }
+ckb-verification = { git = "https://github.com/gpBlockchain/ckb", branch = "copilot/update-ckb-vm-to-asm-rv64im" }
+ckb-verification-traits = { git = "https://github.com/gpBlockchain/ckb", branch = "copilot/update-ckb-vm-to-asm-rv64im" }
