@@ -50,5 +50,5 @@ jobs:
         run: |
           export CARGO_TARGET_RISCV64GC_UNKNOWN_LINUX_GNU_LINKER=riscv64-linux-gnu-gcc
           export CARGO_TARGET_RISCV64GC_UNKNOWN_LINUX_GNU_RUSTFLAGS="-C link-args=-L -C link-args=/usr/lib/gcc-cross/riscv64-linux-gnu/13"
-          export CARGO_TARGET_RISCV64GC_UNKNOWN_LINUX_GNU_RUNNER="qemu-riscv64-static -L /usr/riscv64-linux-gnu"
+          export CARGO_TARGET_RISCV64GC_UNKNOWN_LINUX_GNU_RUNNER="setarch linux64 --addr-no-randomize qemu-riscv64-static -L /usr/riscv64-linux-gnu"
           cargo test --release --verbose --target riscv64gc-unknown-linux-gnu
