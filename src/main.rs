@@ -1,5 +1,9 @@
 extern crate core;
 
+#[cfg(test)]
+#[global_allocator]
+static ALLOC: tikv_jemallocator::Jemalloc = tikv_jemallocator::Jemalloc;
+
 use ckb_testtool::{
     ckb_error::Error,
     ckb_types::{
