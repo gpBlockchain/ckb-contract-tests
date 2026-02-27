@@ -1,0 +1,54 @@
+name: RISC-V 64 Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  qemu-riscv64:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: 1.92.0
+          override: true
+
+      - name: Cache Rust dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-riscv64-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Setup RISC-V environment
+        run: |
+          sudo apt-get update -y
+          sudo apt install -y gcc-riscv64-linux-gnu \
+                              qemu-user-static
+          rustup target add riscv64gc-unknown-linux-gnu
+
+      - name: Add RISC-V contract target
+        run: rustup target add riscv64imac-unknown-none-elf
+
+      - name: Build Contracts
+        run: |
+          cd demo
+          make build
+
+      - name: Run Tests
+        run: |
+          export CARGO_TARGET_RISCV64GC_UNKNOWN_LINUX_GNU_LINKER=riscv64-linux-gnu-gcc
+          export CARGO_TARGET_RISCV64GC_UNKNOWN_LINUX_GNU_RUSTFLAGS="-C link-args=-L -C link-args=/usr/lib/gcc-cross/riscv64-linux-gnu/13"
+          export CARGO_TARGET_RISCV64GC_UNKNOWN_LINUX_GNU_RUNNER="setarch linux64 --addr-no-randomize qemu-riscv64-static -L /usr/riscv64-linux-gnu"
+          cargo test --release --verbose --target riscv64gc-unknown-linux-gnu
