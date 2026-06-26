@@ -6,8 +6,8 @@ edition = "2021"
 [dependencies]
 ckb-std = { version = "0.17.0", default-features = false, features = ["allocator", "ckb-types", "dummy-atomic", "log"]}
 serde = { version = "1.0", default-features = false, features = ["derive"] }
-ckb-script-ipc = { version = "1.0.1" }
-ckb-script-ipc-common = { version = "1.0.1" }
+ckb-script-ipc = { version = "=1.0.3" }
+ckb-script-ipc-common = { version = "=1.0.3" }
 #ckb-rust-std = { version = "1.0.0", features = ["rust_before_181"]}
 ckb-rust-std = { version = "1.0.0"}
 
