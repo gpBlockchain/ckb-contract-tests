@@ -1,5 +1,9 @@
 extern crate core;
 
+#[cfg(test)]
+#[global_allocator]
+static ALLOC: tikv_jemallocator::Jemalloc = tikv_jemallocator::Jemalloc;
+
 use ckb_testtool::{
     ckb_error::Error,
     ckb_types::{
@@ -12,10 +16,8 @@ use std::env;
 use std::fs;
 use std::path::PathBuf;
 use std::str::FromStr;
-use ckb_std::ckb_types::core::ScriptHashType;
-use ckb_std::ckb_types::packed::Script;
-
-use ckb_testtool::ckb_types::packed::{CellDep, CellInput, CellOutput, CellOutputBuilder, OutPoint, ScriptOptBuilder};
+use ckb_testtool::ckb_types::core::ScriptHashType;
+use ckb_testtool::ckb_types::packed::{CellDep, CellInput, CellOutput, CellOutputBuilder, OutPoint, Script, ScriptOptBuilder, Uint64};
 use ckb_testtool::ckb_types::prelude::{Builder, Entity, Pack, Unpack};
 use serde_molecule::from_slice;
 use crate::cell_message::cell::Cell;
@@ -204,7 +206,7 @@ impl ContractUtil {
         // data
         let out_point1 = self.context.create_cell(cell_output.build(), cell_tx.get_data().into());
         let input = CellInput::new_builder()
-            .since(since.pack())
+            .since(Pack::<Uint64>::pack(&since))
             .previous_output(out_point1).build();
         tx_builder.as_advanced_builder()
             .input(input).build()
@@ -270,7 +272,7 @@ impl ContractUtil {
         };
 
         // let data = cell_tx.get_data();
-        cell_output.capacity((redundant_cap as u64).pack())
+        cell_output.capacity(Pack::<Uint64>::pack(&(redundant_cap as u64)))
         // let expected_length = cell_output.expected_length();
         // cell_output = cell_output.capacity(
         //     ((expected_length + data.len() + redundant_cap) as u64).pack()
@@ -356,7 +358,7 @@ impl ContractUtil {
         };
 
         // let data = cell_tx.get_data();
-        cell_output = cell_output.capacity((redundant_cap as u64).pack());
+        cell_output = cell_output.capacity(Pack::<Uint64>::pack(&(redundant_cap as u64)));
         // let expected_length = cell_output.expected_length();
         // cell_output = cell_output.capacity(
         //     ((expected_length + data.len() + redundant_cap) as u64).pack()
