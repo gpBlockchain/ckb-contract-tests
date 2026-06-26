@@ -19,7 +19,7 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           profile: minimal
-          toolchain: 1.92.0
+          toolchain: 1.95.0
           override: true
 
       - name: Cache Rust dependencies
@@ -39,7 +39,10 @@ jobs:
           rustup target add riscv64gc-unknown-linux-gnu
 
       - name: Add RISC-V contract target
-        run: rustup target add riscv64imac-unknown-none-elf
+        run: |
+          rustup target add riscv64imac-unknown-none-elf
+          rustup toolchain install 1.93.0 --profile minimal
+          rustup +1.93.0 target add riscv64imac-unknown-none-elf
 
       - name: Build Contracts
         run: |
