@@ -5,10 +5,10 @@ edition = "2021"
 
 [dependencies]
 ckb-std = { version = "0.17.0", default-features = false, features = ["allocator", "ckb-types", "dummy-atomic", "log"]}
-#ckb-script-ipc-common = { version = "1.0.1", features = ["enable-logging"] }
-ckb-script-ipc-common = { version = "1.0.3" }
+#ckb-script-ipc-common = { version = "=1.0.3", features = ["enable-logging"] }
+ckb-script-ipc-common = { version = "=1.0.3" }
 serde = { version = "1.0", default-features = false, features = ["derive"] }
-ckb-script-ipc = { version = "1.0.3" }
+ckb-script-ipc = { version = "=1.0.3" }
 log = "0.4.25"
 
 [[bin]]
