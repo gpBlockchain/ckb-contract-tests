@@ -30,9 +30,9 @@ git = "https://github.com/XuJiandong/serde_molecule.git"
 rev = "07f145d"
 
 [patch.crates-io]
-# ckb-vm dependencies from mohanson-fork (asm support on rv64gc)
-ckb-vm = { git = "https://github.com/mohanson-fork/ckb-vm", branch = "asm_rv64im" }
-ckb-vm-definitions = { git = "https://github.com/mohanson-fork/ckb-vm", branch = "asm_rv64im" }
+# ckb-vm dependencies from mohanson-fork (fix aarch64 pc)
+ckb-vm = { git = "https://github.com/mohanson-fork/ckb-vm", branch = "fix_aarch64_pc" }
+ckb-vm-definitions = { git = "https://github.com/mohanson-fork/ckb-vm", branch = "fix_aarch64_pc" }
 # ckb dependencies from gpBlockchain (updated to work with new ckb-vm)
 ckb-chain-spec = { git = "https://github.com/gpBlockchain/ckb", branch = "copilot/update-ckb-vm-to-asm-rv64im" }
 ckb-constant = { git = "https://github.com/gpBlockchain/ckb", branch = "copilot/update-ckb-vm-to-asm-rv64im" }

@@ -687,7 +687,7 @@ dependencies = [
 [[package]]
 name = "ckb-vm"
 version = "0.24.0"
-source = "git+https://github.com/mohanson-fork/ckb-vm?branch=asm_rv64im#0be9780d393edaa03f2a15a59686491eca83cbea"
+source = "git+https://github.com/mohanson-fork/ckb-vm?branch=fix_aarch64_pc#2411a1328433fd8311cb574a5450825832679ecf"
 dependencies = [
  "byteorder",
  "bytes",
@@ -703,7 +703,7 @@ dependencies = [
 [[package]]
 name = "ckb-vm-definitions"
 version = "0.24.0"
-source = "git+https://github.com/mohanson-fork/ckb-vm?branch=asm_rv64im#0be9780d393edaa03f2a15a59686491eca83cbea"
+source = "git+https://github.com/mohanson-fork/ckb-vm?branch=fix_aarch64_pc#2411a1328433fd8311cb574a5450825832679ecf"
 dependencies = [
  "pastey",
 ]
