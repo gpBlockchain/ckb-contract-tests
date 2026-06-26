@@ -39,10 +39,7 @@ jobs:
           rustup target add riscv64gc-unknown-linux-gnu
 
       - name: Add RISC-V contract target
-        run: |
-          rustup target add riscv64imac-unknown-none-elf
-          rustup toolchain install 1.93.0 --profile minimal
-          rustup +1.93.0 target add riscv64imac-unknown-none-elf
+        run: rustup target add riscv64imac-unknown-none-elf
 
       - name: Build Contracts
         run: |
